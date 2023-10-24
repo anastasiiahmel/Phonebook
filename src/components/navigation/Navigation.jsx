@@ -41,7 +41,7 @@ const Navigation = () => {
 };
 
 const navStyle = {
-  background: '#4682B4',
+  background: '	#696969',
   color: '#fff',
   padding: '10px',
 };
