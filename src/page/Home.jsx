@@ -3,15 +3,12 @@
 import React from 'react';
 import { Button, Box, Typography  } from '@mui/material';
 
-// import { HomeStyled } from './HomeStyledstyled';
 import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const navigate = useNavigate();
 
-  // const handleClickLogout = () => {
-  //   navigate('/logout');
-  // }
+\
 
    return (
     <>

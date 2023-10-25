@@ -179,8 +179,7 @@ const Contacts = () => {
             </div>
              <Box maxWidth="100vh"
          flexDirection="column"
-  alignItems="center"
-  justifyContent="center"  paddingLeft={50} >
+  alignItems="center"justifyContent="center"   >
           <div>
                 <TextField
                   maxWidth="100vh"
