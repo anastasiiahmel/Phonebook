@@ -9,6 +9,8 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
+  Box,
+  Typography
 } from '@mui/material';
 
 
@@ -122,17 +124,28 @@ const Contacts = () => {
 
   return (
     <div>
-      <h2>Contacts</h2>
+        <Typography variant="h3" align="center" >
+            Contacts
+           </Typography>
+
       {error ? (
         <p>Error: {error}</p>
       ) : (
         <>
-          <div>
-            <TextField
+            <div>
+              <Box maxWidth="100vh"
+         flexDirection="column"
+  alignItems="center"
+  justifyContent="center"
+  paddingLeft={50}
+              >
+                
+                <TextField
+
               type="text"
               placeholder="Name"
               variant="outlined"
-              margin="normal"
+              margin="50vh"
               fullWidth
               value={newContact.name}
               onChange={e =>
@@ -154,13 +167,24 @@ const Contacts = () => {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={handleCreateContact}
+                  onClick={handleCreateContact}
+           
+                    sx={{ width: '200px',
+                   display: 'block',
+    margin: '0 auto',}}
             >
               Create Contact
-            </Button>
-          </div>
+                </Button>
+                </Box>
+            </div>
+             <Box maxWidth="100vh"
+         flexDirection="column"
+  alignItems="center"
+  justifyContent="center"  paddingLeft={50} >
           <div>
-            <TextField
+                <TextField
+                  maxWidth="100vh"
+        
               type="text"
               placeholder="Search Contacts"
               variant="outlined"
@@ -169,7 +193,14 @@ const Contacts = () => {
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
             />
-          </div>
+              </div>
+            </Box>
+            <Box maxWidth="100vh"
+         flexDirection="column"
+  alignItems="center"
+  justifyContent="center"
+  paddingLeft={50}
+              >
           <List>
             {filteredContacts.map(contact => (
               <ListItem key={contact.id}>
@@ -180,12 +211,13 @@ const Contacts = () => {
                     aria-label="delete"
                     onClick={() => handleDeleteContact(contact.id)}
                   >
-
+×
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
             ))}
-          </List>
+              </List>
+              </Box>
         </>
       )}
     </div>
