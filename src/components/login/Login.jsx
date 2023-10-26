@@ -1,8 +1,10 @@
-// Login.jsx
+
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Button, TextField, Typography, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Button, TextField, Typography, Container, Box} from '@mui/material';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,13 +20,14 @@ const Login = () => {
       ...formData,
       [name]: value,
     });
+    console.log(value);
   };
 
   const handleLoginSuccess = async (token) => {
     localStorage.setItem('authToken', token);
-    console.log('Автентифікація успішна');
-    navigate('/contacts');
+    Notify.success('Authentication is successful !!!')
 
+    navigate('/contacts');
 
     <Button
       variant="contained"
@@ -56,17 +59,21 @@ const Login = () => {
         handleLoginSuccess(response.data.token);
       }
     } catch (error) {
-      if (error.response) {
-        console.error('Authentication failed:', error.message);
-      } else {
-        console.error('An error occurred during authentication:', error.message);
-      }
+  
+       Notify.failure('An error occurred during authentication !')
+      
     }
   };
 
   return (
     <Container maxWidth="100vh">
-      <Typography variant="h2">Authentication</Typography>
+      <Typography variant="h3" align="center">Authentication</Typography>
+        <Box maxWidth="100vh"
+         flexDirection="column"
+  alignItems="center"
+  justifyContent="center"
+  paddingLeft={50}
+              >
       <form onSubmit={handleSubmit}>
         <TextField
           label="Email"
@@ -90,12 +97,17 @@ const Login = () => {
           required
           margin="normal"
         />
-        <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary"
+   sx={{
+    display: 'block',
+    margin: '0 auto',}}>
           Sign in
         </Button>
       </form>
+      </Box>
     </Container>
   );
 };
 
 export default Login;
+

@@ -1,15 +1,10 @@
-
-
 import React from 'react';
-import { Button, Box, Typography  } from '@mui/material';
-
 import { useNavigate } from 'react-router-dom';
+
+import { Button, Box, Typography  } from '@mui/material';
 
 export const Home = () => {
   const navigate = useNavigate();
-
-
-
    return (
     <>
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
@@ -19,6 +14,8 @@ export const Home = () => {
            </Typography>
            <Typography variant="body1" align="center">
           <p>This web application is a tool with a lot of functionality that will simplify the process of organizing and managing your personal phone book.</p>
+             </Typography>
+              <Typography variant="body1" align="center">
              <p>Choose the action you want to take:</p>
              </Typography>
         </div>
@@ -43,5 +40,4 @@ export const Home = () => {
   );
 };
 
-// export default Home;
 

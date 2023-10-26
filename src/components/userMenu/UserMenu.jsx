@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const Logout = () => {
   const [error, setError] = useState(null);
@@ -36,16 +38,13 @@ const Logout = () => {
       if (response.status === 200) {
         localStorage.removeItem('authToken');
         setIsLoggedOut(true);
-        console.log('User exit successful');
-        
+        Notify.success('User exit successful !!!')
         navigate('/register');
       }
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error);
-      } else {
-        setError('Error while exiting');
-      }
+      } 
     }
   };
 

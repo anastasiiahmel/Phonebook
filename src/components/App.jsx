@@ -4,7 +4,7 @@ import Navigation from './navigation/Navigation';
 import Register from './register/Register';
 import Login from './login/Login';
 import Contacts from './contacts/Contacts';
-import { Home } from '../page/Home';
+import { Home } from './home/Home';
 
 const App = () => {
   return (

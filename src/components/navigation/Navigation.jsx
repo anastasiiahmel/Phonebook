@@ -1,28 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import UserMenu from '../userMenu/UserMenu';
 
 const Navigation = () => {
-  const isAuthenticated= useState(!!localStorage.getItem('authToken'));
+  const isAuthenticated = useState(!!localStorage.getItem('authToken'));
 
   return (
     <nav style={navStyle}>
       <ul style={ulStyle}>
-        <li style={liStyle}>
-          <Link to="/register" style={linkStyle}>
-           {/* Registration */}
-          </Link>
-        </li>
           <li style={liStyle}>
           <Link to="/home" style={linkStyle}>
            Home
           </Link>
         </li>
-        <li style={liStyle}>
-          <Link to="/login" style={linkStyle}>
-           {/* Login */}
-          </Link>
-        </li>
+         
         <li style={liStyle}>
           {isAuthenticated ? (
             <Link to="/contacts" style={linkStyle}>
@@ -30,7 +22,7 @@ const Navigation = () => {
             </Link>
           ) : (
             <Link to="/login" style={linkStyle}>
-              {/* Login */}
+              Login
             </Link>
           )}
         </li>

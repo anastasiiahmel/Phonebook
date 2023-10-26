@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+ 
+import axios from 'axios';
 import {
   TextField,
   Button,
@@ -61,7 +62,7 @@ const Contacts = () => {
       if (!token) {
         throw new Error('Authorization token is missing');
       }
-
+console.log(newContact)
       const response = await axios.post(
         'https://connections-api.herokuapp.com/contacts',
         newContact,
@@ -134,56 +135,62 @@ const Contacts = () => {
         <>
             <div>
               <Box maxWidth="100vh"
-         flexDirection="column"
-  alignItems="center"
-  justifyContent="center"
-  paddingLeft={50}
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              paddingLeft={50}
               >
                 
                 <TextField
-
               type="text"
               placeholder="Name"
               variant="outlined"
-              margin="50vh"
+              margin="normal"
               fullWidth
               value={newContact.name}
               onChange={e =>
                 setNewContact({ ...newContact, name: e.target.value })
               }
-            />
+                />
+                    </Box>
+                    <Box maxWidth="100vh"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              paddingLeft={50}
+              >
             <TextField
               type="text"
               placeholder="Number"
               variant="outlined"
               margin="normal"
               fullWidth
-              value={newContact.number}
-              onChange={e =>
-                setNewContact({ ...newContact, number: e.target.value })
-              }
-            />
+                  value={newContact.number}
+                  onChange={e =>
+                    setNewContact({ ...newContact, number: e.target.value })
+                  }
+                  />
+
             <Button
               variant="contained"
               color="primary"
               fullWidth
                   onClick={handleCreateContact}
-           
-                    sx={{ width: '200px',
-                   display: 'block',
-    margin: '0 auto',}}
+                  sx={{ width: '200px',
+                  display: 'block',
+                  margin: '0 auto',}}
             >
               Create Contact
                 </Button>
-                </Box>
+            </Box>
             </div>
-             <Box maxWidth="100vh"
-         flexDirection="column"
-  alignItems="center"justifyContent="center"   >
+             <Box  maxWidth="100vh"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              paddingLeft={50}>
           <div>
                 <TextField
-                  maxWidth="100vh"
-        
               type="text"
               placeholder="Search Contacts"
               variant="outlined"
@@ -195,22 +202,23 @@ const Contacts = () => {
               </div>
             </Box>
             <Box maxWidth="100vh"
-         flexDirection="column"
-  alignItems="center"
-  justifyContent="center"
-  paddingLeft={50}
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              paddingLeft={50}
               >
           <List>
             {filteredContacts.map(contact => (
               <ListItem key={contact.id}>
                 <ListItemText primary={contact.name} />
+                 <ListItemText primary={contact.number} />
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
                     aria-label="delete"
                     onClick={() => handleDeleteContact(contact.id)}
                   >
-×
+                  x
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import axios from 'axios';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ const Register = () => {
 
   const handleRegisterSuccess = (token) => {
     localStorage.setItem('authToken', token);
-    console.log('Authentication is successful');
+   Notify.success('Authentication is successful !!!')
   };
 
   const handleSubmit = async (e) => {
@@ -43,14 +45,12 @@ const Register = () => {
       if (response.status === 201) {
         const { token } = response.data;
         handleRegisterSuccess(token);
-        console.log('Registration is successful');
+           Notify.success('Registration is successful !!!')
       }
     } catch (error) {
       if (error.response) {
-        console.error('Registration error:', error.message);
-      } else {
-        console.error('Error during registration:', error.message);
-      }
+      Notify.failure('Error during registration !')
+      } 
     }
   };
 
