@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const Logout = () => {
   const [error, setError] = useState(null);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   const navigate = useNavigate();
@@ -15,7 +17,27 @@ const Logout = () => {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     setIsUserLoggedIn(token !== null);
+
+    if (token) {
+      loadUserEmail(token);
+    }
   }, []);
+
+  const loadUserEmail = async (token) => {
+    try {
+      const response = await axios.get('https://connections-api.herokuapp.com/users/current', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        setUserEmail(response.data.email);
+      }
+    } catch (error) {
+       Notify.failure('Email loading error:', error)
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -38,7 +60,7 @@ const Logout = () => {
       if (response.status === 200) {
         localStorage.removeItem('authToken');
         setIsLoggedOut(true);
-        Notify.success('User exit successful !!!')
+        Notify.success('User exit successful !!!');
         navigate('/register');
       }
     } catch (error) {
@@ -51,17 +73,20 @@ const Logout = () => {
   return (
     <div>
       {isUserLoggedIn && !isLoggedOut ? (
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
           {error ? (
             <p>Error: {error}</p>
           ) : (
-            <Button
-              variant="contained"
-              style={{ backgroundColor: 'red', color: 'white' }}
-              onClick={handleLogout}
-            >
-              Go Out
-            </Button>
+            <>
+              <p>Congratulations: {userEmail} !!!</p>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: 'red', color: 'white', marginLeft: '10px' }}
+                onClick={handleLogout}
+              >
+                Go Out
+              </Button>
+            </>
           )}
         </div>
       ) : null}

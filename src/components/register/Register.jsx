@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const Register = () => {
     email: '',
     password: '',
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -45,7 +46,8 @@ const Register = () => {
       if (response.status === 201) {
         const { token } = response.data;
         handleRegisterSuccess(token);
-           Notify.success('Registration is successful !!!')
+        Notify.success('Registration is successful !!!')
+        return navigate('/contacts');
       }
     } catch (error) {
       if (error.response) {

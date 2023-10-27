@@ -62,7 +62,7 @@ const Contacts = () => {
       if (!token) {
         throw new Error('Authorization token is missing');
       }
-console.log(newContact)
+
       const response = await axios.post(
         'https://connections-api.herokuapp.com/contacts',
         newContact,
