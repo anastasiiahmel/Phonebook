@@ -1,10 +1,10 @@
 
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { Button, TextField, Typography, Container, Box} from '@mui/material';
+import { Button, TextField, Typography, Container, Box } from '@mui/material';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,17 +25,9 @@ const Login = () => {
 
   const handleLoginSuccess = async (token) => {
     localStorage.setItem('authToken', token);
-    Notify.success('Authentication is successful !!!')
+    Notify.success('Authentication is successful !!!');
 
-    navigate('/contacts');
-
-    <Button
-      variant="contained"
-      style={{ backgroundColor: 'red', color: 'white' }}
-      onClick={() => navigate('/logout')}
-    >
-      Go Out
-    </Button>
+    navigate('/contacts'); 
   };
 
   const handleSubmit = async (e) => {
@@ -59,55 +51,50 @@ const Login = () => {
         handleLoginSuccess(response.data.token);
       }
     } catch (error) {
-  
-       Notify.failure('An error occurred during authentication !')
-      
+      Notify.failure('An error occurred during authentication !');
     }
   };
 
   return (
     <Container maxWidth="100vh">
       <Typography variant="h3" align="center">Authentication</Typography>
-        <Box maxWidth="100vh"
-         flexDirection="column"
-  alignItems="center"
-  justifyContent="center"
-  paddingLeft={50}
-              >
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="Email"
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          variant="outlined"
-          fullWidth
-          required
-          margin="normal"
-        />
-        <TextField
-          label="Password"
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          variant="outlined"
-          fullWidth
-          required
-          margin="normal"
-        />
-          <Button type="submit" variant="contained" color="primary"
-   sx={{
-    display: 'block',
-    margin: '0 auto',}}>
-          Sign in
-        </Button>
-      </form>
+      <Box
+        maxWidth="100vh"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        paddingLeft={50}
+      >
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+            margin="normal"
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+            margin="normal"
+          />
+          <Button type="submit" variant="contained" color="primary" sx={{ display: 'block', margin: '0 auto' }}>
+            Sign in
+          </Button>
+        </form>
       </Box>
     </Container>
   );
 };
 
 export default Login;
-

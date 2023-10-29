@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
- 
+
 import axios from 'axios';
 import {
   TextField,
@@ -16,6 +16,7 @@ import {
 
 
 const Contacts = () => {
+
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState(null);
   const [newContact, setNewContact] = useState({ name: '', number: '' });
@@ -56,37 +57,52 @@ const Contacts = () => {
   }, [navigate]);
 
   const handleCreateContact = async () => {
-    try {
-      const token = localStorage.getItem('authToken');
+  const { name, number } = newContact;
 
-      if (!token) {
-        throw new Error('Authorization token is missing');
-      }
+ 
+  const nameExists = contacts.some(contact => contact.name === name);
+  const numberExists = contacts.some(contact => contact.number === number);
 
-      const response = await axios.post(
-        'https://connections-api.herokuapp.com/contacts',
-        newContact,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+  if (nameExists || numberExists) {
 
-      if (response.status === 201) {
-        setNewContact({ name: '', number: '' });
-        setContacts([...contacts, response.data]);
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error.response.data.error);
-      } else {
-        setError('Error creating contact');
-      }
+      alert(`${name} or entered ${number} number is already in contacts.`);
+
+    setNewContact({ name: '', number: '' });
+    return;
+  }
+
+  try {
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      throw new Error('Authorization token is missing');
     }
-  };
 
+    const response = await axios.post(
+      'https://connections-api.herokuapp.com/contacts',
+      newContact,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.status === 201) {
+      setNewContact({ name: '', number: '' });
+      setContacts([...contacts, response.data]);
+    }
+  } catch (error) {
+    if (error.response) {
+      setError(error.response.data.error);
+    } else {
+      setError('Error creating contact');
+    }
+  }
+};
+
+  
   const handleDeleteContact = async contactId => {
     try {
       const token = localStorage.getItem('authToken');
@@ -149,7 +165,7 @@ const Contacts = () => {
               fullWidth
               value={newContact.name}
               onChange={e =>
-                setNewContact({ ...newContact, name: e.target.value })
+                setNewContact({ ...newContact, name: e.target.value})
               }
                 />
                     </Box>
@@ -160,7 +176,7 @@ const Contacts = () => {
               paddingLeft={50}
               >
             <TextField
-              type="text"
+              type="tel"
               placeholder="Number"
               variant="outlined"
               margin="normal"
