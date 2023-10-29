@@ -20,7 +20,7 @@ const Login = () => {
       ...formData,
       [name]: value,
     });
-    console.log(value);
+
   };
 
   const handleLoginSuccess = async (token) => {
