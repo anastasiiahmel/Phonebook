@@ -13,18 +13,18 @@ const Navigation = () => {
     <nav style={navStyle}>
       <ul style={ulStyle}>
         <li style={liStyle}>
-          <NavLink to="/home" style={linkStyle} exact>
+          <NavLink to="/home" style={linkStyle} exact={true.toString()}>
             Home
           </NavLink>
         </li>
 
         <li style={liStyle}>
           {isAuthenticated ? (
-            <NavLink to="/contacts" style={linkStyle} activeStyle={{ color: 'red' }}>
+            <NavLink to="/contacts" style={linkStyle}>
               Contacts
             </NavLink>
           ) : (
-            <NavLink to="/login" style={linkStyle} activeStyle={{ color: 'red' }}>
+            <NavLink to="/login" style={linkStyle} >
               Login
             </NavLink>
           )}
@@ -32,7 +32,7 @@ const Navigation = () => {
 
         {!isAuthenticated && (
           <li style={liStyle}>
-            <NavLink to="/register" style={linkStyle} activeStyle={{ color: 'red' }}>
+            <NavLink to="/register" style={linkStyle} >
               Sign up
             </NavLink>
           </li>
