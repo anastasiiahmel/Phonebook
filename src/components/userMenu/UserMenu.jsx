@@ -61,7 +61,7 @@ const Logout = () => {
         localStorage.removeItem('authToken');
         setIsLoggedOut(true);
         Notify.success('User exit successful !!!');
-        navigate('/register');
+        navigate('/home');
       }
     } catch (error) {
       if (error.response) {

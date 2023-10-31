@@ -1,31 +1,42 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import UserMenu from '../userMenu/UserMenu';
 
+// import { Box } from '@mui/material';
+
 const Navigation = () => {
-  const isAuthenticated = useState(!!localStorage.getItem('authToken'));
+  const isAuthenticated = !!localStorage.getItem('authToken');
 
   return (
     <nav style={navStyle}>
       <ul style={ulStyle}>
-          <li style={liStyle}>
-          <Link to="/home" style={linkStyle}>
-           Home
-          </Link>
+        <li style={liStyle}>
+          <NavLink to="/home" style={linkStyle} exact>
+            Home
+          </NavLink>
         </li>
-         
+
         <li style={liStyle}>
           {isAuthenticated ? (
-            <Link to="/contacts" style={linkStyle}>
+            <NavLink to="/contacts" style={linkStyle} activeStyle={{ color: 'red' }}>
               Contacts
-            </Link>
+            </NavLink>
           ) : (
-            <Link to="/login" style={linkStyle}>
+            <NavLink to="/login" style={linkStyle} activeStyle={{ color: 'red' }}>
               Login
-            </Link>
+            </NavLink>
           )}
         </li>
+
+        {!isAuthenticated && (
+          <li style={liStyle}>
+            <NavLink to="/register" style={linkStyle} activeStyle={{ color: 'red' }}>
+              Sign up
+            </NavLink>
+          </li>
+        )}
       </ul>
       <UserMenu />
     </nav>
@@ -33,14 +44,14 @@ const Navigation = () => {
 };
 
 const navStyle = {
-  background: '	#696969',
+  background: '#696969',
   color: '#fff',
   padding: '10px',
 };
 
 const ulStyle = {
   listStyle: 'none',
-    display: 'flex',
+  display: 'flex',
 };
 
 const liStyle = {
