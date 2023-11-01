@@ -4,20 +4,26 @@ import { NavLink } from 'react-router-dom';
 
 import UserMenu from '../userMenu/UserMenu';
 
-// import { Box } from '@mui/material';
+import { Box } from '@mui/material';
 
 const Navigation = () => {
   const isAuthenticated = !!localStorage.getItem('authToken');
 
   return (
     <nav style={navStyle}>
+     
       <ul style={ulStyle}>
         <li style={liStyle}>
           <NavLink to="/home" style={linkStyle} exact={true.toString()}>
             Home
           </NavLink>
         </li>
-
+        <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-end"
+              paddingLeft={150}
+              >
         <li style={liStyle}>
           {isAuthenticated ? (
             <NavLink to="/contacts" style={linkStyle}>
@@ -25,7 +31,7 @@ const Navigation = () => {
             </NavLink>
           ) : (
             <NavLink to="/login" style={linkStyle} >
-              Login
+              Log in
             </NavLink>
           )}
         </li>
@@ -37,7 +43,9 @@ const Navigation = () => {
             </NavLink>
           </li>
         )}
-      </ul>
+        </Box>
+        </ul>
+        
       <UserMenu />
     </nav>
   );
