@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({

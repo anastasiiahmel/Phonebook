@@ -1,10 +1,8 @@
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,8 +23,7 @@ const Login = () => {
 
   const handleLoginSuccess = async (token) => {
     localStorage.setItem('authToken', token);
-    Notify.success('Authentication is successful !!!');
-
+    toast.success('Authentication is successful !!!');
     navigate('/contacts'); 
   };
 
@@ -51,7 +48,7 @@ const Login = () => {
         handleLoginSuccess(response.data.token);
       }
     } catch (error) {
-      Notify.failure('An error occurred during authentication !');
+     toast.error("Check the correctness of the password for mail !", {duration: 4000});
     }
   };
 
