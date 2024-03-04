@@ -24,7 +24,7 @@
   <img src="https://raw.githubusercontent.com/notiflix/Notiflix/main/docs/notiflix-logo.svg?sanitize=true" width="40" height="40" alt="notiflix" />
   <img width="12" />
   <img width="12" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/2560px-Axios_logo_%282020%29.svg.png" alt="axios" width="40" height="40"/>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/2560px-Axios_logo_%282020%29.svg.png" alt="axios" width="60" height="40"/>
 </div>
 
 <h2>Preview</h2>
