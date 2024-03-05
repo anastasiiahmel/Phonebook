@@ -31,4 +31,4 @@
 <img src="https://i.imgur.com/Tl3btTy.png" alt="welcome page" />
 <img src="https://i.imgur.com/T6siPq2.png" alt="auth page" />
 <img src="https://i.imgur.com/qqdBzrW.png" alt="register page" />
-<img src="https://i.imgur.com/YRdLOof.png" alt="contacts page" />
+<img src="https://i.imgur.com/Rpcqant.png" alt="contacts page" />
