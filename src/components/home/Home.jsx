@@ -27,7 +27,7 @@ export const Home = () => {
         padding: '50px',
       }} textAlign={"Center"}>
             <h1>
-               Welcome to the Phonebook web application! 
+               Welcome to the Phonebook web application !!! 
             </h1>
           </Box>
        </motion.div>

@@ -8,6 +8,7 @@ import Contacts from './contacts/Contacts';
 import { Home } from './home/Home';
 
 const App = () => {
+
   return (
     <>
       <Navigation />
@@ -23,3 +24,8 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
