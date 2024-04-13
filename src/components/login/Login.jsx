@@ -1,55 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
-import { toast } from 'react-hot-toast';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { selectLogIn } from 'redux/auth/selectors';
+import { loginUser } from 'redux/auth/operations';
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectLogIn);
+
+  useEffect(() => {
+    isLoggedIn && navigate('/contacts');
+  }, [isLoggedIn, navigate]);
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prevState => ({
+      ...prevState,
       [name]: value,
-    });
-
+    }));
   };
-
-  const handleLoginSuccess = async (token) => {
-    localStorage.setItem('authToken', token);
-    toast.success('Authentication is successful !!!');
-    navigate('/contacts'); 
-  };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const dataUser = {
+      email: formData.email,
+      password: formData.password,
+    };
 
-    try {
-      const response = await axios.post(
-        'https://connections-api.herokuapp.com/users/login',
-        {
-          email: formData.email,
-          password: formData.password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        handleLoginSuccess(response.data.token);
-      }
-    } catch (error) {
-     toast.error("Check the correctness of the password for mail !", {duration: 4000});
-    }
+    dispatch(loginUser(dataUser)).unwrap()
+    .then(() => {
+      Notify.success('Login success!');
+    }).catch((e) => {
+      Notify.failure('Login error, Email or Password wrong!');
+  });
   };
 
   return (

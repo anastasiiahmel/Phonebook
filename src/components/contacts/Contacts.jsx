@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import axios from 'axios';
 import {
   TextField,
   Button,
@@ -13,131 +10,53 @@ import {
   Box,
   Typography
 } from '@mui/material';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts } from 'redux/contacts/slice';
+
+import { addContacts, deleteContacts, getAllContacts } from 'redux/contacts/operations';
 
 
-const Contacts = () => {
+  const Contacts = () => {
 
-  const [contacts, setContacts] = useState([]);
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+
   const [error, setError] = useState(null);
   const [newContact, setNewContact] = useState({ name: '', number: '' });
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    dispatch(getAllContacts());
+  }, [dispatch]);
 
-    if (!token) {
-      return navigate('/login');
-    }
-
-    const fetchContacts = async () => {
-      try {
-        const response = await axios.get(
-          'https://connections-api.herokuapp.com/contacts',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          setContacts(response.data);
-        }
-      } catch (error) {
-        if (error.response) {
-          setError(error.response.data.error);
-        } else {
-          setError('Error fetching contacts');
-        }
-      }
-    };
-
-    fetchContacts();
-  }, [navigate]);
-
-  const handleCreateContact = async () => {
-  const { name, number } = newContact;
-
- 
+  const handleCreateContact = async (v, a) => {
+  const {name, number} = newContact;
   const nameExists = contacts.some(contact => contact.name === name);
   const numberExists = contacts.some(contact => contact.number === number);
 
   if (nameExists || numberExists) {
-
-      alert(`${name} or entered ${number} number is already in contacts.`);
-
+    alert(`${name} or entered ${number} number is already in contacts.`);
+    setError(null);
     setNewContact({ name: '', number: '' });
     return;
   }
-
-  try {
-    const token = localStorage.getItem('authToken');
-
-    if (!token) {
-      throw new Error('Authorization token is missing');
-    }
-
-    const response = await axios.post(
-      'https://connections-api.herokuapp.com/contacts',
-      newContact,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    if (response.status === 201) {
-      setNewContact({ name: '', number: '' });
-      setContacts([...contacts, response.data]);
-    }
-  } catch (error) {
-    if (error.response) {
-      setError(error.response.data.error);
-    } else {
-      setError('Error creating contact');
-    }
-  }
+  dispatch(addContacts(newContact));
+  Notify.success('Contacts add!');
 };
 
+  const filteredContacts = contacts?.filter(contact =>
+  contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+  const handleDeleteContact = async id => {
+    dispatch(deleteContacts(id));
+    Notify.success('Contact removed!');
   
-  const handleDeleteContact = async contactId => {
-    try {
-      const token = localStorage.getItem('authToken');
-
-      if (!token) {
-        throw new Error('Authorization token is missing');
-      }
-
-      const response = await axios.delete(
-        `https://connections-api.herokuapp.com/contacts/${contactId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        const updatedContacts = contacts.filter(
-          contact => contact.id !== contactId
-        );
-        setContacts(updatedContacts);
-      }
-    } catch (error) {
-      if (error.response) {
-        setError(error.response.data.error);
-      } else {
-        setError('Error deleting contact');
-      }
-    }
   };
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  
 
   return (
     <div>
@@ -168,8 +87,8 @@ const Contacts = () => {
                 setNewContact({ ...newContact, name: e.target.value})
               }
                 />
-                    </Box>
-                    <Box maxWidth="100vh"
+              </Box>
+              <Box maxWidth="100vh"
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
@@ -224,7 +143,7 @@ const Contacts = () => {
               paddingLeft={50}
               >
           <List>
-            {filteredContacts.map(contact => (
+            {filteredContacts?.map(contact => (
               <ListItem key={contact.id}>
                 <ListItemText primary={contact.name} />
                  <ListItemText primary={contact.number} />

@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from 'redux/auth/operations';
+import { selectLogIn } from 'redux/auth/selectors';
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectLogIn);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    isLoggedIn && navigate('/contacts');
+  }, [isLoggedIn, navigate]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,42 +30,24 @@ const Register = () => {
     });
   };
 
-  const handleRegisterSuccess = (token) => {
-    localStorage.setItem('authToken', token);
-   Notify.success('Authentication is successful !!!')
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const dataUser = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
 
-    try {
-      const response = await axios.post(
-        'https://connections-api.herokuapp.com/users/signup',
-        {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.status === 201) {
-        const { token } = response.data;
-        handleRegisterSuccess(token);
-        Notify.success('Registration is successful !!!')
-        return navigate('/contacts');
-      }
-    } catch (error) {
-      if (error.response) {
-      Notify.failure('Error during registration !')
-      } 
     }
-  };
 
+    dispatch(registerUser(dataUser)).unwrap()
+      .then(() => {
+        Notify.success('Register success!');
+        return navigate('/contacts');
+      }).catch((e) => {
+        Notify.failure('Duplicate, Email');
+    });
+  };
+  
   return (
     <Container maxWidth="xs">
       <Typography variant="h4">Registration</Typography>

@@ -1,31 +1,53 @@
-import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
 
-import Navigation from './navigation/Navigation';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+
+
 import Register from './register/Register';
 import Login from './login/Login';
 import Contacts from './contacts/Contacts';
 import { Home } from './home/Home';
 
-const App = () => {
+import Navigation from './navigation/Navigation';
+import { refresh } from 'redux/auth/operations';
+
+ const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refresh());
+  }, [dispatch]);
+
 
   return (
     <>
-      <Navigation />
+       <Navigation />
       <Routes>
-        <Route path='/home' element={<Home/>}/>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="*" element={<Navigate to="/home" />} />
+        <Route path='/' >
+          <Route index element={<Home />} />
+          <Route path='/contacts' element={
+            <PrivateRoute>
+              <Contacts />
+            </PrivateRoute>} />
+
+          <Route path='/register' element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>} />
+          <Route  path='/login' element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>} />
+          <Route path='*' element={<Navigate to='/' />} />
+        </Route>
       </Routes>
-</>
+
+    </>
   );
 };
 
 export default App;
-
-
-
-
-
