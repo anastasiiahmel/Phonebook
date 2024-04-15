@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { message } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLogIn } from 'redux/auth/selectors';
@@ -40,9 +40,9 @@ const Login = () => {
 
     dispatch(loginUser(dataUser)).unwrap()
     .then(() => {
-      Notify.success('Login success!');
+      message.success('Login success!');
     }).catch((e) => {
-      Notify.failure('Login error, Email or Password wrong!');
+      message.error('Login error, Email or Password wrong!');
   });
   };
 
@@ -82,6 +82,7 @@ const Login = () => {
           <Button type="submit" variant="contained" color="primary" sx={{ display: 'block', margin: '0 auto' }}>
             Sign in
           </Button>
+          
         </form>
       </Box>
     </Container>

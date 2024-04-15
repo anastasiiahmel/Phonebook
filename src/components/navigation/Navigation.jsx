@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 import UserMenu from '../userMenu/UserMenu';
 
@@ -7,67 +6,48 @@ import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import {selectLogIn } from 'redux/auth/selectors'; 
 
+import { LinksItem, LinksRoute, ListUserMenu, PageNav } from './Navigation.styled';
+
 const Navigation = () => {
 
   const isAuthenticated = useSelector(selectLogIn);
 
   return (
-    <nav style={navStyle}>
-      <ul style={ulStyle}>
-        <li style={liStyle}>
-          <NavLink to="/home" style={linkStyle} exact={true.toString()}>
+    <PageNav>
+      <ListUserMenu>
+        <LinksItem>
+          <LinksRoute to="/home" exact={true.toString()}>
             Home
-          </NavLink>
-        </li>
+          </LinksRoute>
+        </LinksItem>
         <Box
           display="flex"
           alignItems="center"
           justifyContent="flex-end"
-          paddingLeft={150}
         >
-          <li style={liStyle}>
+          <LinksItem>
             {isAuthenticated ? (
-              <NavLink to="/contacts" style={linkStyle}>
+              <LinksRoute to="/contacts">
                 Contacts
-              </NavLink>
+              </LinksRoute>
             ) : (
-              <NavLink to="/login" style={linkStyle}>
+              <LinksRoute to="/login">
                 Log in
-              </NavLink>
+              </LinksRoute>
             )}
-          </li>
+          </LinksItem>
           {!isAuthenticated && (
-            <li style={liStyle}>
-              <NavLink to="/register" style={linkStyle}>
+            <LinksItem>
+              <LinksRoute to="/register">
                 Sign up
-              </NavLink>
-            </li>
+              </LinksRoute>
+            </LinksItem>
           )}
         </Box>
-      </ul>
+      </ListUserMenu>
       <UserMenu />
-    </nav>
+    </PageNav>
   );
-};
-
-const navStyle = {
-  background: '#696969',
-  color: '#fff',
-  padding: '10px',
-};
-
-const ulStyle = {
-  listStyle: 'none',
-  display: 'flex',
-};
-
-const liStyle = {
-  margin: '0 10px',
-};
-
-const linkStyle = {
-  textDecoration: 'none',
-  color: '#fff',
 };
 
 export default Navigation;

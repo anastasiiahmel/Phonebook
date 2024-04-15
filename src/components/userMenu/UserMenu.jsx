@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '@mui/material';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { message } from 'antd';
 
 import { logoutUser } from 'redux/auth/operations';
 import { selectUserToken, selectUserName } from 'redux/auth/selectors';
@@ -21,7 +21,7 @@ const UserMenu = () => {
     dispatch(logoutUser());
     navigate('/home');
     setError(null);
-    Notify.success('Log out success!');
+    message.success('Log out success!');
   };
 
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, TextField, Typography, Container, Box } from '@mui/material';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from 'redux/auth/operations';
 import { selectLogIn } from 'redux/auth/selectors';
@@ -41,10 +41,10 @@ const Register = () => {
 
     dispatch(registerUser(dataUser)).unwrap()
       .then(() => {
-        Notify.success('Register success!');
+        message.success('Register success!');
         return navigate('/contacts');
       }).catch((e) => {
-        Notify.failure('Duplicate, Email');
+        message.error('Duplicate, Email !');
     });
   };
   

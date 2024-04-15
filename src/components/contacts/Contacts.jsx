@@ -10,8 +10,7 @@ import {
   Box,
   Typography
 } from '@mui/material';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/slice';
 
@@ -37,13 +36,13 @@ import { addContacts, deleteContacts, getAllContacts } from 'redux/contacts/oper
   const numberExists = contacts.some(contact => contact.number === number);
 
   if (nameExists || numberExists) {
-    alert(`${name} or entered ${number} number is already in contacts.`);
+    message.warning(`${name} or entered ${number} number is already in contacts.`);
     setError(null);
     setNewContact({ name: '', number: '' });
     return;
   }
   dispatch(addContacts(newContact));
-  Notify.success('Contacts add!');
+  message.success('Contacts add!');
 };
 
   const filteredContacts = contacts?.filter(contact =>
@@ -52,7 +51,7 @@ import { addContacts, deleteContacts, getAllContacts } from 'redux/contacts/oper
 
   const handleDeleteContact = async id => {
     dispatch(deleteContacts(id));
-    Notify.success('Contact removed!');
+    message.success('Contact removed!');
   
   };
 

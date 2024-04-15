@@ -8,7 +8,7 @@ export const Home = () => {
    return (
     <>
       <motion.div
-            className="box"
+      className="box"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
@@ -20,19 +20,17 @@ export const Home = () => {
          <Box
            maxWidth="100vh"
           sx={{
-          display: 'block',
+          display: 'flex',
             margin: '0 auto',
           marginTop: '200px',
         backgroundColor: 'gray', 
         padding: '50px',
       }} textAlign={"Center"}>
             <h1>
-               Welcome to the Phonebook web application !!! 
+               Welcome to the Phonebook web application! 
             </h1>
           </Box>
        </motion.div>
-
-
     </>
   );
 };
