@@ -50,7 +50,6 @@ const instance = axios.create({
   };
 
   export const addContact = async (dataUser) => {
-    updateToken();
     const { data } = await instance.post('contacts', dataUser);
     return data;
   };

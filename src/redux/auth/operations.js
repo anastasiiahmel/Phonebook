@@ -42,7 +42,7 @@ export const registerUser = createAsyncThunk(
         const state = thunkAPI.getState();
         const token = state.auth.token;
         if (!token) thunkAPI.rejectWithValue('Unable to refresh user');
-        setToken(token);
+         setToken(token);
         return refresh();
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);

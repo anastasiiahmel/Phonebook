@@ -1,16 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addContact, allContacts,firstLogin, deleteContact, updateToken } from "redux/service/api";
+import { addContact, allContacts, deleteContact } from "redux/service/api";
 
 
 export const getAllContacts = createAsyncThunk(
   'contacts/getAllContacts',
   async (_, thunkAPI) => {
-    try {
-      if (firstLogin.status) {
-        await updateToken();
-        firstLogin.status = false // Оновлення токена
-      }
-      return await allContacts(); // Отримання контактів
+    try { 
+      return await allContacts(); 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
