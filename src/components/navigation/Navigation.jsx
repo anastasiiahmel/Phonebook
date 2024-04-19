@@ -4,13 +4,13 @@ import UserMenu from '../userMenu/UserMenu';
 
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import {selectLogIn } from 'redux/auth/selectors'; 
+import { selectUserToken } from 'redux/auth/selectors'; 
 
 import { LinksItem, LinksRoute, ListUserMenu, PageNav } from './Navigation.styled';
 
 const Navigation = () => {
 
-  const isAuthenticated = useSelector(selectLogIn);
+  const isAuthenticated = useSelector(selectUserToken);
 
   return (
     <PageNav>

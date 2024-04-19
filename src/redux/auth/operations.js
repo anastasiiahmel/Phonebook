@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { logIn, logOut, refreshUser, singUp } from 'redux/service/api';
+import { logIn, logOut, refresh, singUp } from 'redux/service/api';
 
 export const registerUser = createAsyncThunk(
     'auth/register',
@@ -34,11 +34,15 @@ export const registerUser = createAsyncThunk(
     }
   );
 
-  export const refresh = createAsyncThunk(
+
+  export const refreshUser = createAsyncThunk(
     'auth/refresh',
     async (_, thunkAPI) => {
       try {
-        return refreshUser();
+        const state = thunkAPI.getState();
+        const token = state.auth.token;
+        if (!token) thunkAPI.rejectWithValue('Unable to refresh user');
+        return refresh();
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
       }

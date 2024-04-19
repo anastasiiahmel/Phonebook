@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {  loginUser, logoutUser, refresh, registerUser } from './operations';
+import {  loginUser, logoutUser,refreshUser, registerUser } from './operations';
+import persistReducer from 'redux-persist/es/persistReducer';
+import storage from 'redux-persist/lib/storage';
 
 const initialState = {
   token: '',
   profile: null,
   isLoggedIn: false,
   isLoading: false,
+  isRefreshing: false,
 };
 
 const handlePending = (state) => {
@@ -25,11 +28,11 @@ const handleRejected = (state, { error }) => {
 const slice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         state.token = payload.token;
-       
         state.profile = payload.user;
         state.isLoggedIn = true;
       })
@@ -37,13 +40,14 @@ const slice = createSlice({
         state.token = payload.token;
         state.profile = payload.user;
         state.isLoggedIn = true;
+        
       })
       .addCase(logoutUser.fulfilled, (state, { payload }) => {
         state.token = '';
         state.profile = null;
         state.isLoggedIn = false;
       })
-      .addCase(refresh.fulfilled, (state, { payload }) => {
+      .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.profile = payload;
         state.isLoggedIn = true;
       })
@@ -54,4 +58,13 @@ const slice = createSlice({
 
 });
 
-export const registerReducer = slice.reducer;
+const persistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
+
+export const registerReducer = persistReducer(
+  persistConfig,
+  slice.reducer
+);

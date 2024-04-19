@@ -5,22 +5,22 @@ import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import { message } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLogIn } from 'redux/auth/selectors';
+import {selectLogIn } from 'redux/auth/selectors';
 import { loginUser } from 'redux/auth/operations';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectLogIn);
-
-  useEffect(() => {
-    isLoggedIn && navigate('/contacts');
-  }, [isLoggedIn, navigate]);
-
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  
+  useEffect(() => {
+    isLoggedIn && navigate('/contacts');
+  }, [isLoggedIn, navigate]);
+
 
 
   const handleChange = (e) => {
@@ -38,8 +38,8 @@ const Login = () => {
       password: formData.password,
     };
 
-    dispatch(loginUser(dataUser)).unwrap()
-    .then(() => {
+    dispatch(loginUser(dataUser))
+    .then(() => {  
       message.success('Login success!');
     }).catch((e) => {
       message.error('Login error, Email or Password wrong!');
