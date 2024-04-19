@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const firstLogin = { status: false };
+export const firstLogin = { status: false };
 
 const instance = axios.create({ 
     baseURL: 'https://connections-api.herokuapp.com/',
   });
 
-  const setToken = (token) => {
+  export  const setToken = (token) => {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
@@ -14,7 +14,7 @@ const instance = axios.create({
     delete instance.defaults.headers.common['Authorization'];
   };
 
-  const updateToken = () => {
+  export const updateToken = () => {
     const token = JSON.parse(localStorage.getItem('persist:auth'));
     setToken(JSON.parse(token?.token));
   };
@@ -40,16 +40,12 @@ const instance = axios.create({
   };
 
   export const refresh = async () => {
-    updateToken();
     const { data } = await instance.get('users/current');
-    setToken(data.token);
     return data;
 }
 
   export const allContacts = async () => {
-    if (firstLogin.status) updateToken();
     const { data } = await instance.get('contacts');
-    firstLogin.status = false;
     return data;
   };
 
