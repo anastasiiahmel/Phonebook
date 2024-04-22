@@ -31,9 +31,6 @@ export const contactsSlice = createSlice({
     builder
       .addCase(getAllContacts.fulfilled, (state, { payload }) => {
         state.items = payload;
-        state.data = payload;
-        state.profile = payload.user;
-
       })
       .addCase(addContacts.fulfilled, (state, { payload }) => {
         state.items.push(payload);

@@ -22,7 +22,6 @@ const instance = axios.create({
 
   export const singUp = async (dataUser) => {
     const { data } = await instance.post('users/signup', dataUser);
-    
     setToken(data.token);
     return data;
   };
@@ -30,13 +29,14 @@ const instance = axios.create({
   export const logIn = async (dataUser) => {
     const { data } = await instance.post('users/login', dataUser);
     setToken(data.token);
+    firstLogin.status = true; 
     return data;
   };
 
   export const logOut = async () => {
     await instance.post('users/logout');
     deleteToken();
-
+    firstLogin.status = false;
   };
 
   export const refresh = async () => {
@@ -45,8 +45,10 @@ const instance = axios.create({
 }
 
   export const allContacts = async () => {
+    firstLogin.status = true; 
     const { data } = await instance.get('contacts');
     return data;
+
   };
 
   export const addContact = async (dataUser) => {

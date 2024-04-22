@@ -6,7 +6,7 @@ export const getAllContacts = createAsyncThunk(
   'contacts/getAllContacts',
   async (_, thunkAPI) => {
     try { 
-      return await allContacts(); 
+      return  allContacts(); 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
