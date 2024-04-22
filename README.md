@@ -13,18 +13,22 @@
 
 <h2>Built with</h2>
 <div align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/React_Logo_SVG.svg" height="40" alt="react logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
   <img width="12" />
-  <img src="https://www.codesmith.io/hs-fs/hubfs/Blog%20Images/Blog%20Photos/react-router-logo.png?width=600&name=react-router-logo.png" width="60" height="40" alt="react router" />
+  <img src="https://www.svgrepo.com/show/354262/react-router.svg" height="40" alt="react router" />
+    <img width="12" />
+  <img src="https://cdn.simpleicons.org/redux/764ABC" height="40" alt="redux logo"  />
   <img width="12" />
   <img src="https://www.techcareer.net/_next/image?url=https%3A%2F%2Fcdn.gcp.techcareer.net%2Fblog_mui_7b4c3455b5%2Fblog_mui_7b4c3455b5.png%3Fupdated_at%3D2022-12-28T14%3A45%3A19.394Z&w=1200&q=75" height="40" alt="mui logo"  />
   <img width="12" />
   <img src="https://www.ejable.com/wp-content/uploads/2022/04/Framer-Motion.webp" width="40" height="40" alt="emotion" />
   <img width="12" />
-  <img src="https://raw.githubusercontent.com/notiflix/Notiflix/main/docs/notiflix-logo.svg?sanitize=true" width="40" height="40" alt="notiflix" />
+   <img src="https://emotion.sh/logo-48x48.png" width="40" height="40" alt="emotion" />
+   <img width="12" />
+   <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" width="40" height="40" alt="ant-design" />
   <img width="12" />
   <img width="12" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Axios_logo_%282020%29.svg/2560px-Axios_logo_%282020%29.svg.png" alt="axios" width="70" height="40"/>
+  <img src="https://cdn.worldvectorlogo.com/logos/axios.svg" alt="axios" height="40"/>
 </div>
 
 <h2>Preview</h2>
