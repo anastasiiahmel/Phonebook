@@ -29,7 +29,6 @@ const instance = axios.create({
   export const logIn = async (dataUser) => {
     const { data } = await instance.post('users/login', dataUser);
     setToken(data.token);
-    firstLogin.status = true; 
     return data;
   };
 
@@ -40,18 +39,23 @@ const instance = axios.create({
   };
 
   export const refresh = async () => {
+    firstLogin.status = true;
+    updateToken();
     const { data } = await instance.get('users/current');
+    setToken(data.token);
     return data;
 }
 
   export const allContacts = async () => {
-    firstLogin.status = true; 
-    const { data } = await instance.get('contacts');
+    if (firstLogin.status) updateToken();
+    const { data } = await instance('contacts');
+    firstLogin.status = false;
     return data;
 
   };
 
   export const addContact = async (dataUser) => {
+    updateToken();
     const { data } = await instance.post('contacts', dataUser);
     return data;
   };

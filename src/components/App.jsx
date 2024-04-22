@@ -1,35 +1,39 @@
-
-import { Navigate, Route, Routes } from 'react-router-dom';
+import React, { useEffect, Suspense } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
 
-import Register from './register/Register';
-import Login from './login/Login';
-import Contacts from './contacts/Contacts';
-import { Home } from './home/Home';
+import { refreshUser } from 'redux/auth/operations';
+
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 import Navigation from './navigation/Navigation';
-import {  refreshUser } from 'redux/auth/operations';
+import { Loader } from './Loader/Loader';
 
- const App = () => {
+const Home = React.lazy(() => import('./pages/Home'));
+const Contacts = React.lazy(() => import('./pages/Contacts'));
+const Register = React.lazy(() => import('./pages/Register'));
+const Login = React.lazy(() => import('./pages/Login'));
+
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-
   return (
     <>
-       <Navigation />
-      <Routes>
-      <Route path='/home' element={<Home/>}/>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="*" element={<Navigate to="/home" />} />
-      </Routes>
-
+      <Navigation />
+      <Suspense fallback={<Loader/>}>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path='/contacts' element={<PrivateRoute><Contacts /></PrivateRoute>} />
+          <Route path='/register' element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path='/login' element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path='*' element={<Navigate to='/' />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };

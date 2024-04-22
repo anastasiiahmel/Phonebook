@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {selectLogIn } from 'redux/auth/selectors';
 import { loginUser } from 'redux/auth/operations';
 
-const Login = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectLogIn);
@@ -89,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -18,7 +18,7 @@ import { selectContacts } from 'redux/contacts/selectors';
 import { addContacts, deleteContacts, getAllContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/auth/selectors';
 
-const Contacts = () => {
+const ContactsUser = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
@@ -159,4 +159,4 @@ useEffect(() => {
   );
 };
 
-export default Contacts;
+export default ContactsUser;

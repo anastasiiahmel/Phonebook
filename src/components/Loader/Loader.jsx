@@ -1,14 +1,19 @@
-import { FallingLines } from 'react-loader-spinner';
+import { MutatingDots } from 'react-loader-spinner';
 import { LodeWrapper } from './LoaderStyles.styled';
 
 export const Loader = () => {
     return (
   <LodeWrapper>
-       <FallingLines
-  color="#696969"
-  width="100"
+  <MutatingDots
   visible={true}
-  ariaLabel="falling-circles-loading"
+  height="100"
+  width="100"
+  color="#696969"
+  secondaryColor="#696969"
+  radius="12.5"
+  ariaLabel="mutating-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
   />
         </LodeWrapper>
     );

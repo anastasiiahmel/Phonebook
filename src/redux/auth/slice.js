@@ -40,7 +40,6 @@ const slice = createSlice({
         state.token = payload.token;
         state.profile = payload.user;
         state.isLoggedIn = true;
-        
       })
       .addCase(logoutUser.fulfilled, (state, { payload }) => {
         state.token = '';

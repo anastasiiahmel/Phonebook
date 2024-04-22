@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from 'redux/auth/operations';
 import { selectLogIn } from 'redux/auth/selectors';
 
-const Register = () => {
+const RegisterPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectLogIn);
@@ -95,4 +95,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
