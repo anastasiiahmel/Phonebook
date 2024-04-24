@@ -7,8 +7,9 @@ import { refreshUser } from 'redux/auth/operations';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
-import Navigation from './Navigation/Navigation';
+
 import { Loader } from './Loader/Loader';
+import Navigation from './Navigation/Navigation';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Contacts = React.lazy(() => import('./pages/Contacts'));
