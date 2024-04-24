@@ -9,7 +9,7 @@ import { PublicRoute } from './PublicRoute';
 
 
 import { Loader } from './Loader/Loader';
-import Navigation from './Navigation/Navigation';
+import Navigation from './navigation/Navigation';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Contacts = React.lazy(() => import('./pages/Contacts'));
