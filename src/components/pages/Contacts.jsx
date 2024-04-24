@@ -1,4 +1,4 @@
-import ContactsUser from "components/Contacts/Contacts";
+import ContactsUser from "components/contacts/Contacts";
 
 const Contacts = () => {
   return (
