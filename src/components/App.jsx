@@ -7,7 +7,7 @@ import { refreshUser } from 'redux/auth/operations';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
-import Navigation from './navigation/Navigation';
+import Navigation from './Navigation/Navigation';
 import { Loader } from './Loader/Loader';
 
 const Home = React.lazy(() => import('./pages/Home'));

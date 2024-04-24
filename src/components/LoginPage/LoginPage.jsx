@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import { message } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {selectLogIn } from 'redux/auth/selectors';
 import { loginUser } from 'redux/auth/operations';
+import { BtnAuth, FormLogin, GeneralInfo, InputInfo, InputPassword, TitlePage } from './LoginStyles.styled';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -47,45 +47,30 @@ const LoginPage = () => {
   };
 
   return (
-    <Container maxWidth="100vh">
-      <Typography variant="h3" align="center">Authentication</Typography>
-      <Box
-        maxWidth="100vh"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        paddingLeft={50}
-      >
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Email"
+    <GeneralInfo>
+      <TitlePage >Authentication</TitlePage>
+        <FormLogin onSubmit={handleSubmit}>
+          <InputInfo
+            placeholder="Email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
           />
-          <TextField
-            label="Password"
-            type="password"
+          <InputPassword
+            placeholder="Password"
+            id="password"
             name="password"
+            type="password"
             value={formData.password}
             onChange={handleChange}
             variant="outlined"
-            fullWidth
-            required
-            margin="normal"
           />
-          <Button type="submit" variant="contained" color="primary" sx={{ display: 'block', margin: '0 auto' }}>
+          <BtnAuth type="primary" htmlType="submit">
             Sign in
-          </Button>
-          
-        </form>
-      </Box>
-    </Container>
+          </BtnAuth>
+        </FormLogin>
+    </GeneralInfo>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UserMenu from '../userMenu/UserMenu';
+import UserMenu from '../UserMenu/UserMenu';
 
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, TextField, Typography, Container, Box } from '@mui/material';
 import { message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from 'redux/auth/operations';
 import { selectLogIn } from 'redux/auth/selectors';
+import { BtnAuth, FormLogin, GeneralInfo, InputInfo, InputPassword, TitlePage } from 'components/LoginPage/LoginStyles.styled';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -49,49 +49,35 @@ const RegisterPage = () => {
   };
   
   return (
-    <Container maxWidth="xs">
-      <Typography variant="h4">Registration</Typography>
-      <Box mt={2}>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Name"
+    <GeneralInfo>
+      <TitlePage>Registration</TitlePage>
+      <FormLogin onSubmit={handleSubmit}>
+        <InputInfo
+         placeholder="Name"
+         type="text"
+         name="name"
+         value={formData.name}
+         onChange={handleChange}
+       />
+          <InputInfo
+            placeholder="Email"
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
-          />
-          <TextField
-            label="Email"
-            type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
           />
-          <TextField
-            label="Password"
+          <InputPassword
+            placeholder="Password"
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
           />
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <BtnAuth type="primary" htmlType='submit'>
             Sign up
-          </Button>
-        </form>
-      </Box>
-    </Container>
+          </BtnAuth>
+          </FormLogin>
+    </GeneralInfo>
   );
 };
 
