@@ -4,12 +4,16 @@ import UserMenu from '../userMenu/UserMenu';
 
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectUserToken } from 'redux/auth/selectors'; 
+import { selectUserToken } from 'redux/auth/selectors';
 
-import { LinksItem, LinksRoute, ListUserMenu, PageNav } from './Navigation.styled';
+import {
+  LinksItem,
+  LinksRoute,
+  ListUserMenu,
+  PageNav,
+} from './Navigation.styled';
 
 const Navigation = () => {
-
   const isAuthenticated = useSelector(selectUserToken);
 
   return (
@@ -20,27 +24,17 @@ const Navigation = () => {
             Home
           </LinksRoute>
         </LinksItem>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="flex-end"
-        >
+        <Box display="flex" alignItems="center" justifyContent="flex-end">
           <LinksItem>
             {isAuthenticated ? (
-              <LinksRoute to="/contacts">
-                Contacts
-              </LinksRoute>
+              <LinksRoute to="/contacts">Contacts</LinksRoute>
             ) : (
-              <LinksRoute to="/login">
-                Log in
-              </LinksRoute>
+              <LinksRoute to="/login">Log in</LinksRoute>
             )}
           </LinksItem>
           {!isAuthenticated && (
             <LinksItem>
-              <LinksRoute to="/register">
-                Sign up
-              </LinksRoute>
+              <LinksRoute to="/register">Sign up</LinksRoute>
             </LinksItem>
           )}
         </Box>

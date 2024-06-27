@@ -1,9 +1,9 @@
-import ContactsUser from "components/contacts/Contacts";
+import ContactsUser from 'components/ContactsPage/ContactsPage';
 
 const Contacts = () => {
   return (
     <>
-      <ContactsUser/>
+      <ContactsUser />
     </>
   );
 };
