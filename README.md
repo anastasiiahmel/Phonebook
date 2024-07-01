@@ -33,6 +33,6 @@
 
 <h2>Preview</h2>
 <img src="https://i.imgur.com/LAlvWwq.png" alt="welcome page" />
-<img src="https://i.imgur.com/ElCnwsJ.png" alt="auth page" />
+<img src="https://i.imgur.com/fL9CxH6.png" alt="auth page" />
 <img src="https://i.imgur.com/FuUuee6.png" alt="register page" />
 <img src="https://i.imgur.com/7kTHsqr.png" alt="contacts page" />
