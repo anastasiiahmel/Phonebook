@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ListItem, ListItemText } from '@mui/material';
+import { DeleteFilled } from '@ant-design/icons';
 import { BtnAuth } from 'components/LoginPage/LoginStyles.styled';
 
 const General = styled.div`
@@ -28,21 +29,30 @@ const ListItems = styled(ListItem)`
   overflow-wrap: break-word;
 `;
 const ListItemTextNumber = styled(ListItemText)`
-  .css-10hburv-MuiTypography-root {
-    width: 150px;
-    text-align: center;
-  }
+  width: 200px;
+  text-align: center;
+  margin-right: 50px;
 `;
 
 const ListItemTextName = styled(ListItemText)`
-  .css-10hburv-MuiTypography-root {
-    width: 150px;
+  width: 50px;
+  text-align: center;
+  margin-right: 50px;
+`;
+
+const IconDelet = styled(DeleteFilled)`
+  color: #7c7c6a;
+  transition: color 0.9s;
+  &:hover,
+  &:focus {
+    color: #4e4b4b;
   }
 `;
 
 export {
   General,
   BtnCreateContact,
+  IconDelet,
   ListData,
   ListItems,
   ListItemTextNumber,

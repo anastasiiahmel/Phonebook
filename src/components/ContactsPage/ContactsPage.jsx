@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { List, ListItemSecondaryAction, IconButton } from '@mui/material';
-import { message } from 'antd';
+import { List, ListItemSecondaryAction } from '@mui/material';
 import { Loader } from 'components/Loader/Loader';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +19,8 @@ import {
   ListItems,
 } from './ContactsStyles.styled';
 import { InputInfo, TitlePage } from '../LoginPage/LoginStyles.styled';
+import { message } from 'antd';
+import { IconDelet } from './ContactsStyles.styled';
 
 const ContactsUser = () => {
   const dispatch = useDispatch();
@@ -99,15 +100,10 @@ const ContactsUser = () => {
             {filteredContacts?.map(contact => (
               <ListItems key={contact.id}>
                 <ListItemTextName primary={contact.name} />
+
                 <ListItemTextNumber primary={contact.number} />
                 <ListItemSecondaryAction>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => handleDeleteContact(contact.id)}
-                  >
-                    x
-                  </IconButton>
+                  <IconDelet onClick={() => handleDeleteContact(contact.id)} />
                 </ListItemSecondaryAction>
               </ListItems>
             ))}
