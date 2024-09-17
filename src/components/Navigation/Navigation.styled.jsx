@@ -2,23 +2,25 @@ import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 
 const LinksRoute = styled(NavLink)`
-  margin-bottom: 20px;
   text-decoration: none;
   color: #fff;
+  font-size: 18px;
   background-color: #959583;
   padding: 10px 30px;
   border-radius: 5px;
   transition: background-color 0.9s;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
   &:hover,
   &:focus {
     background-color: #7c7c6a;
   }
 `;
-const LinksItem = styled.li`
-  margin: 0px 10px;
-`;
 
-const ListUserMenu = styled.ul`
+const ListUserMenu = styled.div`
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -30,4 +32,8 @@ const PageNav = styled.div`
   padding: 10px;
 `;
 
-export { LinksRoute, ListUserMenu, PageNav, LinksItem };
+const WrapperGoOut = styled.div`
+  display: flex;
+`;
+
+export { LinksRoute, ListUserMenu, PageNav, WrapperGoOut };

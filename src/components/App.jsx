@@ -8,7 +8,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
 import { Loader } from './Loader/Loader';
-import Navigation from './NavigationPages/Navigation';
+import Navigation from './Navigation/Navigation';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Contacts = React.lazy(() => import('./pages/Contacts'));
